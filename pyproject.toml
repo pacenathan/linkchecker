@@ -2,7 +2,7 @@
 name = "LinkChecker"
 dynamic = ["version"]
 description = "check links in web documents or full websites"
-readme = "README.rst"
+readme = "README.md"
 keywords = ["link", "url", "site", "checking", "crawling", "verification", "validation"]
 authors = [{name = "LinkChecker Authors"}]
 maintainers = [{name = "LinkChecker Authors"}]
