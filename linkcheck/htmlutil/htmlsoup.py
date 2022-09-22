@@ -32,9 +32,10 @@ warnings.simplefilter(
     'ignore', bs4.MarkupResemblesLocatorWarning
 )
 
-warnings.simplefilter(
-    'ignore', bs4.builder.XMLParsedAsHTMLWarning
-)
+if hasattr(bs4.builder, "XMLParsedAsHTMLWarning"):
+    warnings.simplefilter(
+        'ignore', bs4.builder.XMLParsedAsHTMLWarning
+    )
 
 
 def make_soup(markup, from_encoding=None):
