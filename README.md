@@ -9,6 +9,7 @@ A fork of https://github.com/linkchecker/linkchecker that includes:
     * `linkchecker.rc` setting: `reportallreferences` in the `[output]` section.
     * Command line argument: `--allrefs`.
 * A [fix for working with a newer (4.10+) install of BeautifulSoup](https://github.com/pacenathan/linkchecker/commit/136104ce62af0476f93e4acfb97d6cdffb8bfb01)
+* A [warning when using AnchorCheck with links that point to a directory and have an anchor](https://github.com/linkchecker/linkchecker/issues/678#issuecomment-1282526281), indicating that those anchors won't be checked.
 
 ## To install
 
