@@ -26,7 +26,7 @@ from datetime import datetime
 from . import urlbase, get_index_html
 from .. import log, LOG_CHECK, fileutil, mimeutil, LinkCheckerError, url as urlutil
 from ..bookmarks import firefox
-from .const import WARN_FILE_MISSING_SLASH, WARN_FILE_SYSTEM_PATH
+from .const import WARN_FILE_MISSING_SLASH, WARN_FILE_SYSTEM_PATH, WARN_DIRECTORY_ANCHOR
 
 
 def get_files(dirname):
@@ -209,6 +209,21 @@ class FileUrl(urlbase.UrlBase):
             )
             raise LinkCheckerError(msg)
         if self.is_directory():
+            if self.get_anchor() \
+               and "AnchorCheck" in self.aggregate.config["enabledplugins"]:
+                self.add_warning(
+                    _(
+                        f"{self.parent_url} references {self.url} which is"
+                        " a directory, and there is an anchor present."
+                        " You have AnchorCheck enabled, but AnchorCheck does"
+                        " not currently support checking anchors for"
+                        " directories. Please see"
+                        " https://github.com/linkchecker/linkchecker/issues/678"
+                        " for more information."
+                    ),
+                    tag=WARN_DIRECTORY_ANCHOR,
+                )
+
             self.set_result(_("directory"))
         else:
             url = fileutil.path_safe(self.url_without_anchor())
